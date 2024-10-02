@@ -1,0 +1,3400 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Справочник по программированию">
+      
+      
+        <meta name="author" content="Асет Дюсенов">
+      
+      
+        <link rel="canonical" href="https://wiki.dyussenov.dev/web/http/">
+      
+      
+        <link rel="prev" href="../../modules/prettytable/">
+      
+      
+        <link rel="next" href="../curl/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Протокол HTTP - База знаний</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#http" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="../.." title="База знаний" class="md-header__button md-logo" aria-label="База знаний" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            База знаний
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Протокол HTTP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dyusen/wiki" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dyusen/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Старт
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../basic/variables/" class="md-tabs__link">
+          
+  
+  Python Core
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../db/sqlite/sql/" class="md-tabs__link">
+          
+  
+  Базы данных
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../modules/datetime/" class="md-tabs__link">
+          
+  
+  Модули
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  WEB
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../git/git_windows/" class="md-tabs__link">
+          
+  
+  Git
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../django/intro/" class="md-tabs__link">
+          
+  
+  Django
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aiogram/intro/" class="md-tabs__link">
+          
+  
+  Aiogram
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../orm/sqlalchemy/start/" class="md-tabs__link">
+          
+  
+  Orm
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../js/dom/" class="md-tabs__link">
+          
+  
+  JavaScript
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../devops/users/" class="md-tabs__link">
+          
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="База знаний" class="md-nav__button md-logo" aria-label="База знаний" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    База знаний
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dyusen/wiki" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dyusen/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Старт
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python Core
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python Core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Способы создания переменных
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ввод и вывод данных. Функции print() и input()
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/if/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    If, else, elif
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/while-python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Цикл while
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/lesson5-for/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Цикл for
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Типы данных
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Типы данных
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/datatypes-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Типы данных
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/lesson6-strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Строки
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/lesson4-lists/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Списки
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/comprehensions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Генераторы списков
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/tuples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Кортежи
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/dict/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Словари
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/set/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Множества
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/collections/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Коллекции
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/lesson6-slices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Срезы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/datatypes/bytestring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Byte-строки
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/exception/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Исключения. Try, except, finally
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/typehints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Аннотации типов
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Функции
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Функции
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Создание функций
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/args/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    args и kwargs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/recurtion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Рекурсия в функциях
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/lambda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Анонимные функции
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/closures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Замыкания
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/functions/decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Декораторы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Файлы
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Файлы
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/text_files/files_read/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Открытие и чтение файлов
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/text_files/files_write/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Запись в файлы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/assert/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assert
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ООП
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            ООП
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/oop/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Введение в ООП
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/oop/create/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Классы, объекты, методы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/oop/03_encapsulation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Инкапсуляция
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/oop/04_inheritance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Наследование
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basic/oop/05_polymorphism/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Полфиморфизм
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Базы данных
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Базы данных
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SQLite 3
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            SQLite 3
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL и реляционные базы данных
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/01_ddl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DDL запросы. Создание, изменение, удаление таблиц
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/02_connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Подключение к базе данных через Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/03_dml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DML запросы. INSERT, UPDATE и DELETE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/04_dql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DQL запрос. SELECT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/05_agregation_grouping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Функции агрегации и группировка
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/06_foreign_key_join/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Внешние ключи. Объединение таблиц
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/sqlite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Заключение
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Postgresql
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Postgresql
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../db/postgresql/install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Запуск через docker контейнер
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Модули
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Модули
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/datetime/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Datetime. Работа с временем и датой
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/json/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Json в Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requests. Запросы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/faker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Faker. Генерация фейковых данных
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/venv/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualenv. Создание виртуального окружения
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/pathlib/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pathlib. Работа с путями
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/pytest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pytest. Тестирование
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/flake8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flake8. Линтеры
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modules/prettytable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prettytable. Красивые таблицы
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    WEB
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            WEB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Протокол HTTP
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Протокол HTTP
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Клиенты и серверы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Структура HTTP запроса
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query string
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP методы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Идемпотентность и безопасноть
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP заголовки
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Структура HTTP ответа
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      Статус-коды HTTP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      GET-запрос Curl
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../makefile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Makefile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Git
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/git_windows/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git в Windows
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/git_delete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Удаление файлов в репозитории
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Django
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Django
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Что такое Django?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/init/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Создание проекта Django
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/creating_app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Создание приложения в проекте
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Маршрутизация и шаблоны URL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/redirect_and_status/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Переадресация и отправка статусных кодов
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/creating_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Создание моделей
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/image_model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Модели с изображениями
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Регистрация, аутентификация
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aiogram
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Aiogram
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiogram/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Введение
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aiogram/echo-bot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Эхо-бот
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Orm
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Orm
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SQLAlchemy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            SQLAlchemy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../orm/sqlalchemy/start/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Введение
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    JavaScript
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            JavaScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../js/dom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Работа с DOM деревом
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/users/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Работа с пользователями
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Клиенты и серверы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Структура HTTP запроса
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query string
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP методы
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Идемпотентность и безопасноть
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP заголовки
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Структура HTTP ответа
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      Статус-коды HTTP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      GET-запрос Curl
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="http">Протокол HTTP</h1>
+<p>Протокол HTTP - неотъемлемая часть современного интернета. HTTP (Hypertext Transfer Protocol), или протокол передачи гипертекста - универсальный язык коммуникации между различными сервисами.</p>
+<p>Протокол, в данном контексте, это набор правил и соглашений, определяющих формат и способ взаимодействия между двумя или более участниками в сети. В случае HTTP, протокол представляет собой набор правил, которые определяют, как клиент и сервер должны обмениваться данными, чтобы осуществлять передачу гипертекстовых документов и других ресурсов через Интернет.</p>
+<h2 id="_1">Клиенты и серверы</h2>
+<p>Протокол HTTP подразумевает диалог между двумя участниками: <strong><em>клиентом</em></strong> и <strong><em>сервером</em></strong>.</p>
+<ul>
+<li>
+<p><strong><em>Клиентом</em></strong> может являться браузер, мобильное приложение или любая другая программа, способная отправлять HTTP запросы. </p>
+</li>
+<li>
+<p><strong><em>Сервером</em></strong> является комьютер со специальным программным обеспечением, которое принимает запросы от клиентов, обрабатывает их и отправляет ответы клиентам.</p>
+</li>
+</ul>
+<blockquote>
+<p>Диалог является отчасти односторонним, так как только клиент способен отправлять запросы. Сервер же способен только ждать этот запрос и отправить ответ после его обработки.</p>
+</blockquote>
+<p><img alt="query string" src="/assets/web/http/http протокол.png" /></p>
+<h2 id="http_1">Структура HTTP запроса</h2>
+<p>Ниже представлен пример простого HTTP запроса:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">POST</span> <span class="nn">/api/users</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john@example.com&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>Разберем этот запрос:</p>
+<ol>
+<li>
+<p>Стартовая строка: <code>POST /api/users HTTP/1.1</code></p>
+<ul>
+<li>
+<p><code>POST</code>: в первую очередь указывается <strong>HTTP-метод</strong>, в нашем случае это метод <code>POST</code>. Если говорить вкратце - <strong>HTTP-метод</strong> говорит серверу в каком ключе обрабатывать запрос. Конвенционально метод <code>POST</code> используется для добавления данных. Это может означать, что данные отправленные в данном запросе будут добавлены, например, в базу данных. Подробнее все методы будут рассмотрены далее.</p>
+</li>
+<li>
+<p><code>/api/users</code>: это <strong>URI</strong> (Uniform Resource Identifier, унифицированный идентификатор ресурса). путь до конкретного ресурса (например, документа), над которым необходимо осуществить операцию. екоторые запросы могут не относиться к какому-либо ресурсу, в этом случае вместо URI в стартовую строку может быть добавлена звёздочка.</p>
+</li>
+<li>
+<p><code>HTTP/1.1</code>: версия протокола HTTP.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Заголовки. В нашем случае их 2, но может быть больше:</p>
+<ul>
+<li>
+<p><code>Host: example.com</code> : указывает на сервер, к которому следует обратиться.</p>
+</li>
+<li>
+<p><code>Content-Type: application/json</code> : указывает, что тело запроса содержит данные в формате JSON.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Пустая строка. Её назначение - сообщить, что все заголовки перечислены и далее будет передано тело запроса.</p>
+</li>
+<li>
+<p>Тело запроса: <code>{"name": "John", "email": "john@example.com"}</code>. В нашем случае это данные в формате JSON, как и сообщалось в заголовке <code>Content-Type</code>. Также бывают случаи, когда тело запроса остается пустым. Например у метода <code>GET</code> не может быть тела запроса.</p>
+</li>
+</ol>
+<p><img alt="структура запроса" src="/assets/web/http/структура запроса.png" /></p>
+<h2 id="query-string">Query string</h2>
+<p>Помимо тела, информацию о запросе можно передать прямо в стартовой строке запроса. Для этого к URI нужно добавить знак вопроса <code>?</code> и прописать данные в формате <code>ключ=значение</code>, а пары разделить через <code>&amp;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://www.example.com/search?q=apple&amp;category=fruits
+</code></pre></div>
+<p><img alt="query string" src="/assets/web/http/query-string.png" /></p>
+<blockquote>
+<p>Зачастую query-string используется именно с GET запросами, но строгой привязки к этому типу запросов нет. Вы можете исспользовать query-string с любым методом запросов.</p>
+</blockquote>
+<h2 id="http_2">HTTP методы</h2>
+<p>Различные методы HTTP существуют для разделения и определения различных типов операций, которые могут быть выполнены над ресурсами. Они обеспечивают удобство и гибкость при выполнении операций получения, создания, обновления и удаления данных на сервере. Мы можем обращаться к одному и тому же ресурсу, но с разными запросами: GET - чтобы получить, PUT - чтобы заменить, DELETE - чтобы удалить. Рассмотрим подробнее каждый из них:</p>
+<ul>
+<li>
+<p><code>GET</code>. Используется для получения ресурса с сервера. Клиент отправляет GET-запрос для получения данных и ресурса, указанного в URI. GET-запросы могут содержать параметры, передаваемые в строке запроса.</p>
+</li>
+<li>
+<p><code>POST</code> используется для отправки данных на сервер для обработки. Клиент отправляет POST-запрос с данными, которые будут обработаны на сервере. POST-запросы могут содержать тело запроса, которое содержит данные для передачи.</p>
+</li>
+<li>
+<p><code>PUT</code> используется для создания или обновления ресурса на сервере. Клиент отправляет PUT-запрос с данными, которые должны быть сохранены по указанному URI. Если ресурс уже существует, PUT-запрос обновит его содержимое, а если ресурс не существует, он будет создан. PUT-запросы также могут содержать тело запроса.</p>
+</li>
+<li>
+<p><code>DELETE</code> используется для удаления ресурса на сервере. Клиент отправляет DELETE-запрос для удаления ресурса, указанного в URI. DELETE-запросы изменяют состояние сервера путем удаления ресурса. Повторные DELETE-запросы к одному и тому же ресурсу обычно должны возвращать статус &ldquo;404 Not Found&rdquo;, поскольку ресурс будет удален.</p>
+</li>
+<li>
+<p><code>PATCH</code> используется для частичного обновления ресурса на сервере. Клиент отправляет PATCH-запрос с данными, которые должны быть применены к ресурсу. Этот метод позволяет обновлять только определенные части ресурса, не трогая остальное содержимое. PATCH-запросы также могут содержать тело запроса.</p>
+</li>
+<li>
+<p><code>HEAD</code> выполняет запрос на получение заголовков ответа от сервера для указанного ресурса. Ответ на HEAD-запрос содержит только заголовки ответа без тела ответа. Этот метод полезен, когда клиенту требуется получить метаданные ресурса без необходимости получения всего содержимого.</p>
+</li>
+<li>
+<p><code>OPTIONS</code> используется для получения списка поддерживаемых методов, заголовков или другой конфигурационной информации для указанного ресурса на сервере. Этот метод позволяет клиенту определить возможности сервера и принять соответствующие решения перед отправкой реального запроса.</p>
+</li>
+</ul>
+<h2 id="_2">Идемпотентность и безопасноть</h2>
+<p><strong>Идемпотентность</strong> (в контексте HTTP) означает что при повторном выполнении одного и того же запроса результат будет одинаковым, и состояние сервера не изменится. Иначе говоря: идемпотентная операция может быть выполнена множество раз, но результат останется одинаковым, как если бы она была выполнена только один раз. Список идемпотентных методов:</p>
+<ul>
+<li>
+<p><code>GET</code>: GET-запросы являются идемпотентными, так как они просто запрашивают данные и не вносят изменений на сервере. Повторные GET-запросы к одному и тому же ресурсу не должны изменять его состояние.</p>
+</li>
+<li>
+<p><code>PUT</code>: PUT-запросы используются для создания или обновления ресурса на сервере. Например, в <code>users/username_1</code> у нас имеется иформация о неком пользователе. Выполняя первый PUT запрос, мы полностью перезаписываем имеющуюся информацию. При последующих PUT запросах с тем же содержимым - мы перезаписываем те же данные, так что состояние сервера после выполненной операции останется тем же, что и после первого PUT запроса</p>
+</li>
+<li>
+<p><code>DELETE</code>: По определению является идемпотентным, но есть нюанс. Проблема в том, что успешный DELETE-запрос по URI <code>users/username_1</code> должен удалить пользователя <code>username_1</code>, но для последующих запросов будет всё время возвращать 404 (Not Found), так как пользователь уже не существует. Возьмем в учет, что при первом DELETE запросе мы удалили запись о пользователе - изменили состоянии базы данных, а при повторном не нашли его - база данных осталось в прежнем состоянии - удалять уже нечего. Отталкиваясь от этого, мы можем назвать метод DELETE идемпотентным.</p>
+</li>
+</ul>
+<hr />
+<p><strong>Безопасность</strong> означает, что вызов метода не имеет побочных эффектов. Следовательно, такие (безопасные) запросы клиенты могут безопасно совершать неоднократно, не опасаясь изменить состояние сервера. Это означает, что сервисы должны придерживаться определения безопасности для GET, HEAD, OPTIONS и TRACE операций. Не выполнения этого свойства может приводить в заблуждение потребителя сервиса, а также вызвать проблемы для веб-кеширования, поисковых систем и других автоматизированных агентов, которые непреднамеренно будут изменять состояние сервера.</p>
+<p>Иначе говоря, безопасный метод гарантирует отсутсвие побочных эффектов при первом и последующих запросах, в то время как идемпотентные запросы изменяют состояние при первом запросе, но не изменяют при последующих. Также, исходя из этого утверждения можно усвоить, что все безопасные методы идемпотентны.</p>
+<blockquote>
+<p>Важно понимать, что идемпотентность и безопасность в вашем серверном приложении вы должны соблюдать самостоятельно. Например, вам ничего не мешает полностью удалить базу данных при получении GET запроса или ничего не добавлять при правильном POST запросе. Но хотели бы вы жить в мире, где каждый разработчик устраивал такую анархию?</p>
+</blockquote>
+<h2 id="http_3">HTTP заголовки</h2>
+<p>Ниже приведен список наиболее распространенных HTTP заголовков:</p>
+<table>
+<thead>
+<tr>
+<th>Название</th>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td>Host: www.example.com</td>
+<td>Указывает доменное имя сервера, на который отправляется запрос.</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)</td>
+<td>Содержит информацию о программе (например, веб-браузере) и операционной системе, используемых для выполнения запроса. Серверы могут использовать эту информацию для оптимизации ответов для конкретных пользовательских агентов</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>Content-Type: application/json</td>
+<td>Определяет тип данных, содержащихся в теле запроса или ответа. Это позволяет серверу и клиенту корректно интерпретировать данные.</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>Content-Length: 1024</td>
+<td>Указывает размер тела запроса или ответа в байтах. С помощью этого заголовка клиент и сервер могут определить конец передачи данных.</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>Accept: text/html, application/xhtml+xml, application/xml;q=0.9, <em>/</em>;q=0.8</td>
+<td>Содержит список MIME-типов (типов содержимого), которые клиент готов принять в ответ на запрос. Сервер может использовать этот заголовок для определения наилучшего формата ответа.</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l</td>
+<td>Используется для передачи учетных данных аутентификации на сервер. В примере указан базовый метод аутентификации (Basic Auth), где &ldquo;YWxhZGRpbjpvcGVuc2VzYW1l&rdquo; представляет закодированные имя пользователя и пароль.</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>Cache-Control: max-age=3600</td>
+<td>Определяет настройки кеширования для ресурса. Значение &ldquo;max-age=3600&rdquo; указывает, что ресурс может быть кэширован на протяжении 3600 секунд (1 часа).</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>Referer: https://www.example.com/page1.html</td>
+<td>Содержит URL предыдущей страницы, с которой был сделан текущий запрос. Сервер может использовать эту информацию для аналитики или контроля.</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>Cookie: sessionid=abc123; username=johndoe</td>
+<td>Передает серверу информацию о ранее сохраненных cookie, связанных с текущим доменом. Сервер может использовать эту информацию для управления состоянием сессии.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>При необходимости, вы можете определить свой новый заголовок. В таком случае к названию нового заголовок стоит добавить префикс <code>X-</code>, например, <code>"X-CustomHeader: value"</code>. Но прежде чем изобретать свой велосипед, рекомендуется ознакомиться с полным списком заголовков. </p>
+</blockquote>
+<h2 id="http_4">Структура HTTP ответа</h2>
+<p>Во многом HTTP ответ похож на запрос. Ниже приведен пример успешного ответа на запрос:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">Content-Length</span><span class="o">:</span> <span class="l">1024</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">   </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello, World!&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Видимым отличием от HTTP запроса является стартовая строка. Стркутра стартовой строки HTTP ответа:</p>
+<ul>
+<li>
+<p><code>HTTP/1.1</code>: тут все должно быть понятно</p>
+</li>
+<li>
+<p><code>200</code>: статус-код. Числовое обозначение статуса обработки запроса. Подробнее - далее.</p>
+</li>
+<li>
+<p><code>OK</code>: пояснение стастус-кода</p>
+</li>
+</ul>
+<p>Также существуют заголовки, которые возвращаются только при ответе:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">200 OK</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">Access-Control-Allow-Origin: *</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">Connection: Keep-Alive</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">Content-Encoding: gzip</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">Content-Type: text/html; charset=utf-8</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">Date: Mon, 18 Jul 2016 16:06:00 GMT</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">Etag: &quot;c561c68d0ba92bbeb8b0f612a9199f722e3a621a&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">Keep-Alive: timeout=5, max=997</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">Last-Modified: Mon, 18 Jul 2016 02:36:04 GMT</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">Server: Apache</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">Set-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secure</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="err">Transfer-Encoding: chunked</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">Vary: Cookie, Accept-Encoding</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">X-Backend-Server: developer2.webapp.scl3.mozilla.com</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">X-Cache-Info: not cacheable; meta data too large</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="err">X-kuma-revision: 1085259</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="err">x-frame-options: DENY</span>
+</code></pre></div>
+<h2 id="-http">Статус-коды HTTP</h2>
+<p>Статус-код в протоколе HTTP представляет числовой код, который возвращается сервером в ответ на запрос клиента. Он предоставляет информацию о результате выполнения запроса и состоянии ответа. Статус-коды используются для обозначения различных сценариев и условий, которые могут возникать при обработке HTTP запросов.</p>
+<p>Статус-код состоит из трех цифр и обычно представлен в виде трехзначного числа. Каждая группа статус-кодов имеет свою семантику:</p>
+<table>
+<thead>
+<tr>
+<th>Категория</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1xx</td>
+<td>Коды из данной категории носят исключительно информативный характер и никак не влияют на обработку запроса.</td>
+</tr>
+<tr>
+<td>2xx</td>
+<td>Коды состояния из этой категории возвращаются в случае успешной обработки клиентского запроса.</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td>Эта категория содержит коды, которые возвращаются, если серверу нужно перенаправить клиента.</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td>Коды данной категории означают, что на стороне клиента был отправлен некорректный запрос. Например, клиент в запросе указал не поддерживаемый метод или обратился к ресурсу, к которому у него нет доступа.</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>Ответ с кодами из этой категории приходит, если на стороне сервера возникла ошибка.</td>
+</tr>
+</tbody>
+</table>
+<p>Список наиболее распротраненных статус кодов:</p>
+<table>
+<thead>
+<tr>
+<th>Статус-код</th>
+<th>Описание</th>
+<th>Развернутое описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>Запрос успешно выполнен, содержимое ответа передается в теле ответа.</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>Запрос успешно выполнен, новый ресурс был создан.</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>Запрос успешно выполнен, но в ответе отсутствует содержимое.</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>Запрашиваемый ресурс был перемещен на новый постоянный URI.</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>Запрашиваемый ресурс временно доступен по другому URI.</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>Ресурс не изменился с момента последнего запроса, используется кэш.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Запрос содержит синтаксическую ошибку или неверные параметры.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>Для доступа к запрашиваемому ресурсу требуется аутентификация.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>Доступ к запрашиваемому ресурсу запрещен, отсутствуют необходимые права.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>Запрашиваемый ресурс не найден на сервере.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Произошла внутренняя ошибка сервера при обработке запроса.</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>Сервер, выступая в роли шлюза или прокси, получил недействительный ответ от сервера выше по цепочке.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>Сервер временно недоступен, обычно из-за перегрузки или проведения технического обслуживания.</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>Сервер, выступая в роли шлюза или прокси, не получил ответ вовремя от сервера выше по цепочке.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="https">HTTPS</h2>
+<p>HTTPS (HyperText Transfer Protocol Secure) - это защищенный протокол передачи гипертекста. Он является комбинацией стандартного протокола HTTP и протокола шифрования SSL/TLS (Secure Sockets Layer/Transport Layer Security). HTTPS обеспечивает безопасное и зашифрованное соединение между веб-браузером пользователя и веб-сервером, что позволяет защитить конфиденциальность и целостность передаваемых данных.</p>
+<p>Чтобы установить HTTPS-соединение, браузеру и серверу надо договориться о симметричном ключе. Для этого сначала браузер и сервер обмениваются асимметрично зашифрованными сообщениями, где указывают секретный ключ и далее общаются при помощи симметричного шифрования.</p>
+<p>Функции протокола HTTPS:
+1. Шифрование данных. При использовании HTTPS все данные, передаваемые между клиентом (обычно веб-браузером) и сервером, шифруются с использованием криптографических алгоритмов. Это предотвращает возможность перехвата и чтения данных злоумышленниками.
+2. Аутентификация. Посетители уверены, что переходят на официальный сайт компании, а не на дубликат, сделанный злоумышленником.
+3. Сохранение данных. Протокол фиксирует все изменения данных. Если злоумышленник всё-таки пытался взломать защиту, об этом можно узнать из сохранённых данных.</p>
+<h2 id="get-curl">GET-запрос Curl</h2>
+<p>Чтобы отправить HTTP-запрос GET через URL в терминале, вы можете использовать утилиту curl:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl &lt;URL&gt;
+</code></pre></div>
+<p>Ниже представлен пример простого GET-запроса Curl:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>https://example.com/
+</code></pre></div>
+<p>Ответ сервера на ваш запрос Curl:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>HTTP/1.1<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Content-Type:<span class="w"> </span>text/html
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Content-Length:<span class="w"> </span><span class="m">643</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">[</span>html-код<span class="o">]</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2020-2024, Асет Дюсенов
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "navigation.expand"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>
