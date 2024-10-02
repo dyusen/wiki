@@ -2,11 +2,11 @@ site_name: База знаний
 site_url: https://wiki.dyussenov.dev/
 site_description: Справочник по программированию
 site_author: Асет Дюсенов
-copyright: 2020-2023, Асет Дюсенов
+copyright: 2020-2024, Асет Дюсенов
 
 # Repository
-repo_name: dyussenov/python-course
-repo_url: https://github.com/dyussenov/python-course
+repo_name: dyusen/wiki
+repo_url: https://github.com/dyusen/wiki
 
 
 nav:
@@ -139,9 +139,4 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
-
-extra:
-  analytics:
-    provider: google
-    property: G-GPHQZETNLC
 
